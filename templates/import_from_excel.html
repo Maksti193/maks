@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Импорт из Excel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .import-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .file-upload-wrapper {
+            position: relative;
+            margin: 30px 0;
+        }
+        
+        .file-upload-input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .file-upload-content {
+            border: 2px dashed #007bff;
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+        
+        .file-upload-content.highlight {
+            background: #e9f5ff;
+            border-color: #0056b3;
+        }
+        
+        .file-upload-icon {
+            font-size: 48px;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        
+        .file-upload-text {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .file-upload-hint {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .file-info-container {
+            margin-top: 20px;
+            animation: fadeIn 0.3s;
+        }
+        
+        .file-info-box {
+            display: flex;
+            align-items: center;
+            background: #e9f5ff;
+            padding: 12px 15px;
+            border-radius: 6px;
+            border: 1px solid #cce5ff;
+        }
+        
+        .file-info-icon {
+            font-size: 24px;
+            color: #1d6f42;
+            margin-right: 15px;
+        }
+        
+        .file-info-details {
+            flex-grow: 1;
+            text-align: left;
+        }
+        
+        .file-info-name {
+            display: block;
+            font-weight: bold;
+            color: #0056b3;
+            margin-bottom: 5px;
+        }
+        
+        .file-info-size {
+            display: block;
+            font-size: 13px;
+            color: #6c757d;
+        }
+        
+        .file-remove-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #dc3545;
+            font-size: 16px;
+            padding: 5px;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .import-btn {
+            background-color: #28a745;
+            padding: 12px 25px;
+        }
+        
+        .back-btn {
+            background-color: #6c757d;
+            padding: 12px 25px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .instructions {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="centered-container">
+        <div class="import-container">
+            <h1><i class="fas fa-file-import"></i> Импорт данных из Excel</h1>
+            
+            <form method="POST" enctype="multipart/form-data" id="importForm">
+                <div class="file-upload-wrapper">
+                    <div class="file-upload-content" id="dropArea">
+                        <input type="file" id="fileInput" name="file" accept=".xlsx,.xls" required class="file-upload-input">
+                        <div class="file-upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <div class="file-upload-text">Перетащите файл сюда или нажмите для выбора</div>
+                        <div class="file-upload-hint">Поддерживаются файлы .xlsx и .xls</div>
+                    </div>
+                    <div class="file-info-container" id="fileInfo"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="article">Статья КоАП:</label>
+                    <select id="article" name="article" class="form-control" required>
+                        <option value="13.19">13.19</option>
+                        <option value="19.6">19.6</option>
+                        <option value="19.7">19.7</option>
+                        <option value="20.25">20.25</option>
+                        <option value="ФССП">ФССП</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="button import-btn" disabled id="submitBtn">
+                        <i class="fas fa-upload"></i> Импортировать данные
+                    </button>
+                    <a href="{{ url_for('task_selection') }}" class="button back-btn">
+                        <i class="fas fa-arrow-left"></i> Назад
+                    </a>
+                </div>
+            </form>
+            
+            <div class="instructions">
+                <h3><i class="fas fa-info-circle"></i> Инструкция по импорту:</h3>
+                <ul style="list-style-type: none; padding-left: 0;">
+                    <li><i class="fas fa-check" style="color: #28a745;"></i> Файл должен быть в формате Excel (.xlsx или .xls)</li>
+                    <li><i class="fas fa-check" style="color: #28a745;"></i> Первая строка должна содержать заголовки столбцов</li>
+                    <li><i class="fas fa-check" style="color: #28a745;"></i> <a href="{{ url_for('export_to_excel') }}" style="color: #007bff; text-decoration: underline;">
+                        <i class="fas fa-download"></i> Скачать шаблон файла
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('fileInput');
+            const fileInfo = document.getElementById('fileInfo');
+            const dropArea = document.getElementById('dropArea');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // 1. Обработка выбора файла через клик
+            fileInput.addEventListener('change', function() {
+                if (fileInput.files && fileInput.files.length > 0) {
+                    displayFileInfo(fileInput.files[0]);
+                }
+            });
+            
+            // 2. Настройка drag and drop
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, preventDefaults, false);
+                document.body.addEventListener(eventName, preventDefaults, false);
+            });
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropArea.addEventListener(eventName, highlightArea, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, unhighlightArea, false);
+            });
+
+            dropArea.addEventListener('drop', function(e) {
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    fileInput.files = files;
+                    displayFileInfo(files[0]);
+                }
+            });
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            function highlightArea() {
+                dropArea.classList.add('highlight');
+            }
+
+            function unhighlightArea() {
+                dropArea.classList.remove('highlight');
+            }
+
+            function displayFileInfo(file) {
+                // Проверка расширения файла
+                if (!file.name.match(/\.(xlsx|xls)$/i)) {
+                    alert('Пожалуйста, выберите файл Excel (.xlsx или .xls)');
+                    return;
+                }
+                
+                // Отображение информации о файле
+                fileInfo.innerHTML = `
+                    <div class="file-info-box">
+                        <div class="file-info-icon">
+                            <i class="fas fa-file-excel"></i>
+                        </div>
+                        <div class="file-info-details">
+                            <span class="file-info-name">${file.name}</span>
+                            <span class="file-info-size">${formatFileSize(file.size)}</span>
+                        </div>
+                        <button type="button" class="file-remove-btn" id="removeFileBtn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                
+                // Обработчик для кнопки удаления файла
+                document.getElementById('removeFileBtn').addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    fileInput.value = '';
+                    fileInfo.innerHTML = '';
+                    submitBtn.disabled = true;
+                });
+                
+                // Активируем кнопку отправки
+                submitBtn.disabled = false;
+            }
+
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const units = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(1024));
+                return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + units[i];
+            }
+        });
+    </script>
+</body>
+</html>

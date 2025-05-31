@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дело № {{ task.fields['Номер дела'] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function confirmDelete() {
+            return confirm('Вы уверены, что хотите удалить эту запись? Это действие нельзя отменить.');
+        }
+    </script>
+</head>
+<body>
+    <div class="centered-container">
+        <h1>Дело № {{ task.fields['Номер дела'] }}</h1>
+
+        <div class="fields-container">
+            {% set fields = [
+                "Номер дела",
+                "Краткое наименование",
+                "Адрес респондента",
+                "Тип респондента (1 - ЮЛ, 2 - ИП, 3 - ДЛ)",
+                "ИНН",
+                "ОКПО",
+                "Должность руководителя",
+                "ФИО руководителя",
+                "Контактные данные респондента",
+                "Форма стат. отчетности",
+                "Период представления отчета",
+                "Сведения о представлении отчета",
+                "Дата совершения правонарушения",
+                "Должность ответственного за предоставление отчетности",
+                "ФИО ответственного",
+                "Паспортные данные",
+                "Дата и место рождения",
+                "Место жительства",
+                "Дата составления протокола об АП, Дата направления определений",
+                "Сведения о явке на протокол",
+                "Отягчающие обстоятельства",
+                "ДАТА РАССМОТРЕНИЕ ДЕЛА",
+                "ОТЛОЖЕНИЕ РАССМОТРЕНИЯ (ДАТА)",
+                "Наказание",
+                "Сумма штрафа",
+                "УИН платежа",
+                "Представление об устранении причин",
+                "Дата вступления постановления в законную силу",
+                "Сведения о получении ПОСТАНОВЛЕНИЯ",
+                "Сведения об ответе на представление",
+                "Сведения об оплате",
+                "Сумма оплаченных штрафов",
+                "Сведения об обжаловании",
+                "Дата направления приставам на взыскание"
+            ] %}
+
+            {% for field in fields %}
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                <strong style="flex: 1;">{{ loop.index }}. {{ field }}:</strong>
+                <span style="flex: 3;">{{ task.fields.get(field, "Не указано") }}</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="action-buttons">
+            <button onclick="location.href='/edit_task/{{ task.id }}'" class="button">
+                Редактировать
+            </button>
+            
+            <form action="/delete_task/{{ task.id }}" method="POST" onsubmit="return confirmDelete();">
+                <button type="submit" class="button delete-button">
+                    Удалить запись
+                </button>
+            </form>
+            
+            <a href="{{ url_for('action_selection', article=task['article']) }}" class="button">
+                Назад
+            </a>
+        </div>
+    </div>
+</body>
+</html>

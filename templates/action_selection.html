@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Действия</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js "></script>
+    <script>
+        function searchRecords(article) {
+            const query = $("#search-input").val().trim();
+            if (query.length < 3) {
+                alert("Введите минимум 3 символа для поиска");
+                return;
+            }
+
+            $.getJSON(`/search_records/${article}?query=${encodeURIComponent(query)}`, function(data) {
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                let resultsHtml = "<table border='1' cellpadding='10'>";
+                resultsHtml += "<thead><tr><th>#</th><th>Номер дела</th><th>Краткое наименование</th><th>Дата рассмотрения дела</th></tr></thead>";
+                resultsHtml += "<tbody>";
+
+                if (data.length === 0) {
+                    resultsHtml += "<tr><td colspan='4'>Ничего не найдено</td></tr>";
+                } else {
+                    data.forEach((record, index) => {
+                        resultsHtml += `
+                            <tr onclick="location.href='/view_task/${record.id}'" style="cursor: pointer;">
+                                <td>${index + 1}</td>
+                                <td>${record.номер_дела}</td>
+                                <td>${record.краткое_наименование}</td>
+                                <td>${record.дата_рассмотрения || "Не указано"}</td>
+                            </tr>
+                        `;
+                    });
+                }
+
+                resultsHtml += "</tbody></table>";
+
+                // Кнопка редактирования
+                resultsHtml += `
+                    <button 
+                        onclick="location.href='/edit_task/${data[0]?.id}'" 
+                        class="button" 
+                        style="margin-bottom: 10px; display: ${data.length > 0 ? 'block' : 'none'};"
+                    >
+                        Редактировать
+                    </button>
+                `;
+
+                $("#results-container").html(resultsHtml);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="centered-container">
+        <h1>Действия для статьи {{ article }}</h1>
+
+        <!-- Форма поиска -->
+        <div class="search-section">
+            <form onsubmit="return false;">
+                <label for="search-input">Поиск:</label>
+                <input type="text" id="search-input" placeholder="Введите минимум 3 символа">
+                <button type="button" onclick="searchRecords('{{ article }}')">Искать</button>
+            </form>
+        </div>
+
+        <!-- Отображение результатов поиска -->
+        <div id="results-container" class="results-section"></div>
+
+        <!-- Кнопки действий -->
+        <div class="action-buttons">
+            <a href="{{ url_for('create_task', article=article) }}" class="button">Внесение дела</a>
+            <a href="{{ url_for('export_to_excel') }}" class="button">Экспорт в Excel</a>
+            <a href="{{ url_for('task_selection') }}" class="button">Назад</a>
+        </div>
+    </div>
+</body>
+</html>

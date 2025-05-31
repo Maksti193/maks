@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="centered-container">
+        <h1>Главная страница</h1>
+        <button onclick="location.href='/auth'" class="button">
+            Авторизация
+        </button>
+        <button onclick="location.href='/registration'" class="button">
+            Регистрация
+        </button>
+        <button onclick="location.href='/repetition_check'" class="button">
+            Проверка повторности
+        </button>
+    </div>
+</body>
+</html>

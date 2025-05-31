@@ -1,0 +1,41 @@
+[file name]: import_from_excel.html
+[file content begin]
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Импорт из Excel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="centered-container">
+        <h1>Импорт данных из Excel</h1>
+        
+        <form method="POST" enctype="multipart/form-data" class="import-form">
+            <div class="form-group">
+                <label for="file">Выберите файл Excel:</label>
+                <input type="file" id="file" name="file" accept=".xlsx,.xls" required>
+                <p class="hint">Файл должен содержать заголовки столбцов в первой строке</p>
+            </div>
+            
+            <button type="submit" class="button import-button">Импортировать</button>
+        </form>
+        
+        <div class="instructions">
+            <h3>Инструкция по импорту:</h3>
+            <ol>
+                <li>Подготовьте файл Excel с данными</li>
+                <li>Первая строка должна содержать заголовки столбцов</li>
+                <li>Соответствующие столбцы будут автоматически сопоставлены с полями системы</li>
+                <li>Поддерживаемые форматы: .xlsx, .xls</li>
+            </ol>
+            
+            <p>Скачать <a href="{{ url_for('export_to_excel') }}" class="template-link">шаблон файла</a></p>
+        </div>
+        
+        <a href="{{ url_for('task_selection') }}" class="button back-button">Назад</a>
+    </div>
+</body>
+</html>
+[file content end]

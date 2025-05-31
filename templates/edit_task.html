@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование записи</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
+    <script src="https://suggest.captcha-free.ru/suggest.js"></script>
+    <script>
+        function clearField(fieldId) {
+            document.getElementById(fieldId).value = "";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            flatpickr("[data-datepicker]", {
+                dateFormat: "d.m.Y",
+                locale: "ru"
+            });
+
+            new suggest.Suggest({
+                input: document.getElementById("Адрес респондента"),
+                token: "free",
+                type: "address",
+                onSelect: function (suggestion) {
+                    document.getElementById("Адрес респондента").value = suggestion.value;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="centered-container">
+        <h1>Редактирование записи</h1>
+        <form method="POST">
+            {% set fields = [
+                "Номер дела",
+                "Краткое наименование",
+                "Адрес респондента",
+                "Тип респондента (1 - ЮЛ, 2 - ИП, 3 - ДЛ)",
+                "ИНН",
+                "ОКПО",
+                "Должность руководителя",
+                "ФИО руководителя",
+                "Контактные данные респондента",
+                "Форма стат. отчетности",
+                "Период представления отчета",
+                "Сведения о представлении отчета",
+                "Дата совершения правонарушения",
+                "Должность ответственного за предоставление отчетности",
+                "ФИО ответственного",
+                "Паспортные данные",
+                "Дата и место рождения",
+                "Место жительства",
+                "Дата составления протокола об АП, Дата направления определений",
+                "Сведения о явке на протокол",
+                "Отягчающие обстоятельства",
+                "ДАТА РАССМОТРЕНИЕ ДЕЛА",
+                "ОТЛОЖЕНИЕ РАССМОТРЕНИЯ (ДАТА)",
+                "Наказание",
+                "Сумма штрафа",
+                "УИН платежа",
+                "Представление об устранении причин",
+                "Дата вступления постановления в законную силу",
+                "Сведения о получении ПОСТАНОВЛЕНИЯ",
+                "Сведения об ответе на представление",
+                "Сведения об оплате",
+                "Сумма оплаченных штрафов",
+                "Сведения об обжаловании",
+                "Дата направления приставам на взыскание"
+            ] %}
+
+            {% for field in fields %}
+            {% set index = loop.index %}
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <label for="{{ field }}" style="flex: 1;">{{ index }}. {{ field }}:</label>
+
+                {% if field == "Тип респондента (1 - ЮЛ, 2 - ИП, 3 - ДЛ)" %}
+                <select id="{{ field }}" name="{{ field }}" style="flex: 3; height: 40px; font-size: 16px;">
+                    <option value="1" {% if task.fields[field] == "1" %}selected{% endif %}>1 - ЮЛ</option>
+                    <option value="2" {% if task.fields[field] == "2" %}selected{% endif %}>2 - ИП</option>
+                    <option value="3" {% if task.fields[field] == "3" %}selected{% endif %}>3 - ДЛ</option>
+                </select>
+                {% elif field == "Наказание" %}
+                <select id="{{ field }}" name="{{ field }}" style="flex: 3; height: 40px; font-size: 16px;">
+                    <option value="Штраф" {% if task.fields[field] == "Штраф" %}selected{% endif %}>Штраф</option>
+                    <option value="Предупреждение" {% if task.fields[field] == "Предупреждение" %}selected{% endif %}>Предупреждение</option>
+                    <option value="Прекращение" {% if task.fields[field] == "Прекращение" %}selected{% endif %}>Прекращение</option>
+                </select>
+                {% elif field in [
+                    "Период представления отчета",
+                    "Сведения о представлении отчета",
+                    "Дата совершения правонарушения",
+                    "Дата и место рождения",
+                    "Дата составления протокола об АП, Дата направления определений",
+                    "ДАТА РАССМОТРЕНИЕ ДЕЛА",
+                    "ОТЛОЖЕНИЕ РАССМОТРЕНИЯ (ДАТА)",
+                    "Дата вступления постановления в законную силу",
+                    "Сведения об оплате",
+                    "Сведения об обжаловании",
+                    "Дата направления приставам на взыскание",
+                    "Сведения о получении ПОСТАНОВЛЕНИЯ",
+                    "Сведения об ответе на представление"
+                ] %}
+                <input 
+                    type="text" 
+                    id="{{ field }}" 
+                    name="{{ field }}" 
+                    data-datepicker 
+                    value="{{ task.fields[field] }}" 
+                    style="flex: 3; height: 40px; font-size: 16px;" 
+                >
+                {% elif field in ["Сумма штрафа", "Сумма оплаченных штрафов"] %}
+                <input 
+                    type="text" 
+                    id="{{ field }}" 
+                    name="{{ field }}" 
+                    oninput="this.value = this.value.replace(/[^0-9.,]/g, '').replace(/,/g, '.');"
+                    value="{{ task.fields[field] }}" 
+                    style="flex: 3; height: 40px; font-size: 16px;" 
+                >
+                {% elif field == "Адрес респондента" %}
+                <input 
+                    type="text" 
+                    id="{{ field }}" 
+                    name="{{ field }}" 
+                    class="kladr-input" 
+                    value="{{ task.fields[field] }}" 
+                    style="flex: 3; height: 40px; font-size: 16px;" 
+                >
+                {% else %}
+                <input 
+                    type="text" 
+                    id="{{ field }}" 
+                    name="{{ field }}" 
+                    value="{{ task.fields[field] }}" 
+                    style="flex: 3; height: 40px; font-size: 16px;" 
+                >
+                {% endif %}
+
+                <button 
+                    type="button" 
+                    onclick="clearField('{{ field }}')" 
+                    style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+                >
+                    Х
+                </button>
+            </div>
+            {% endfor %}
+
+            <button type="submit" class="button">Сохранить</button>
+            <button type="button" onclick="window.history.back()" class="button">Отмена</button>
+        </form>
+        <a href="{{ url_for('action_selection', article=task['article']) }}" class="button">Назад</a>
+    </div>
+</body>
+</html>

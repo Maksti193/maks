@@ -1,0 +1,539 @@
+<!-- ИНН -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="ИНН" style="flex: 1;">ИНН:</label>
+    <input 
+        type="text" 
+        id="ИНН" 
+        name="ИНН" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('ИНН')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- ОКПО -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="ОКПО" style="flex: 1;">ОКПО:</label>
+    <input 
+        type="text" 
+        id="ОКПО" 
+        name="ОКПО" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('ОКПО')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Должность руководителя -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Должность руководителя" style="flex: 1;">Должность руководителя:</label>
+    <input 
+        type="text" 
+        id="Должность руководителя" 
+        name="Должность руководителя" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Должность руководителя')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- ФИО руководителя -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="ФИО руководителя" style="flex: 1;">ФИО руководителя:</label>
+    <input 
+        type="text" 
+        id="ФИО руководителя" 
+        name="ФИО руководителя" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('ФИО руководителя')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Контактные данные респондента -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Контактные данные респондента" style="flex: 1;">Контактные данные респондента:</label>
+    <input 
+        type="text" 
+        id="Контактные данные респондента" 
+        name="Контактные данные респондента" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Контактные данные респондента')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Форма стат. отчетности -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Форма стат. отчетности" style="flex: 1;">Форма стат. отчетности:</label>
+    <input 
+        type="text" 
+        id="Форма стат. отчетности" 
+        name="Форма стат. отчетности" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Форма стат. отчетности')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Период представления отчета -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Период представления отчета" style="flex: 1;">Период представления отчета:</label>
+    <input 
+        type="text" 
+        id="Период представления отчета" 
+        name="Период представления отчета" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Период представления отчета')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Сведения о представлении отчета -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Сведения о представлении отчета" style="flex: 1;">Сведения о представлении отчета:</label>
+    <input 
+        type="text" 
+        id="Сведения о представлении отчета" 
+        name="Сведения о представлении отчета" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Сведения о представлении отчета')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Дата совершения правонарушения -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Дата совершения правонарушения" style="flex: 1;">Дата совершения правонарушения:</label>
+    <input 
+        type="text" 
+        id="Дата совершения правонарушения" 
+        name="Дата совершения правонарушения" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Дата совершения правонарушения')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Должность ответственного за предоставление отчетности -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Должность ответственного за предоставление отчетности" style="flex: 1;">Должность ответственного за предоставление отчетности:</label>
+    <input 
+        type="text" 
+        id="Должность ответственного за предоставление отчетности" 
+        name="Должность ответственного за предоставление отчетности" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Должность ответственного за предоставление отчетности')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- ФИО ответственного -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="ФИО ответственного" style="flex: 1;">ФИО ответственного:</label>
+    <input 
+        type="text" 
+        id="ФИО ответственного" 
+        name="ФИО ответственного" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('ФИО ответственного')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Паспортные данные -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Паспортные данные" style="flex: 1;">Паспортные данные:</label>
+    <input 
+        type="text" 
+        id="Паспортные данные" 
+        name="Паспортные данные" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Паспортные данные')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Дата и место рождения -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Дата и место рождения" style="flex: 1;">Дата и место рождения:</label>
+    <input 
+        type="text" 
+        id="Дата и место рождения" 
+        name="Дата и место рождения" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Дата и место рождения')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Место жительства -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Место жительства" style="flex: 1;">Место жительства:</label>
+    <input 
+        type="text" 
+        id="Место жительства" 
+        name="Место жительства" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Место жительства')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Дата составления протокола об АП, Дата направления определений -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Дата составления протокола об АП" style="flex: 1;">Дата составления протокола об АП, Дата направления определений:</label>
+    <input 
+        type="text" 
+        id="Дата составления протокола об АП" 
+        name="Дата составления протокола об АП" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Дата составления протокола об АП')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Сведения о явке на протокол -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Сведения о явке на протокол" style="flex: 1;">Сведения о явке на протокол:</label>
+    <input 
+        type="text" 
+        id="Сведения о явке на протокол" 
+        name="Сведения о явке на протокол" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Сведения о явке на протокол')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Отягчающие обстоятельства -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Отягчающие обстоятельства" style="flex: 1;">Отягчающие обстоятельства:</label>
+    <input 
+        type="text" 
+        id="Отягчающие обстоятельства" 
+        name="Отягчающие обстоятельства" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Отягчающие обстоятельства')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Дата рассмотрения дела -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Дата рассмотрения дела" style="flex: 1;">Дата рассмотрения дела:</label>
+    <input 
+        type="text" 
+        id="Дата рассмотрения дела" 
+        name="Дата рассмотрения дела" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Дата рассмотрения дела')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Отложение рассмотрения (Дата) -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Отложение рассмотрения" style="flex: 1;">Отложение рассмотрения (Дата):</label>
+    <input 
+        type="text" 
+        id="Отложение рассмотрения" 
+        name="Отложение рассмотрения" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Отложение рассмотрения')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Наказание -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Наказание" style="flex: 1;">Наказание:</label>
+    <input 
+        type="text" 
+        id="Наказание" 
+        name="Наказание" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Наказание')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Сумма штрафа -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Сумма штрафа" style="flex: 1;">Сумма штрафа:</label>
+    <input 
+        type="text" 
+        id="Сумма штрафа" 
+        name="Сумма штрафа" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Сумма штрафа')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- УИН платежа -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="УИН платежа" style="flex: 1;">УИН платежа:</label>
+    <input 
+        type="text" 
+        id="УИН платежа" 
+        name="УИН платежа" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('УИН платежа')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Представление об устранении причин -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Представление об устранении причин" style="flex: 1;">Представление об устранении причин:</label>
+    <input 
+        type="text" 
+        id="Представление об устранении причин" 
+        name="Представление об устранении причин" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Представление об устранении причин')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Дата вступления постановления в законную силу -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Дата вступления постановления в законную силу" style="flex: 1;">Дата вступления постановления в законную силу:</label>
+    <input 
+        type="text" 
+        id="Дата вступления постановления в законную силу" 
+        name="Дата вступления постановления в законную силу" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Дата вступления постановления в законную силу')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Сведения о получении ПОСТАНОВЛЕНИЯ -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Сведения о получении ПОСТАНОВЛЕНИЯ" style="flex: 1;">Сведения о получении ПОСТАНОВЛЕНИЯ:</label>
+    <input 
+        type="text" 
+        id="Сведения о получении ПОСТАНОВЛЕНИЯ" 
+        name="Сведения о получении ПОСТАНОВЛЕНИЯ" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Сведения о получении ПОСТАНОВЛЕНИЯ')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Сведения об ответе на представление -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Сведения об ответе на представление" style="flex: 1;">Сведения об ответе на представление:</label>
+    <input 
+        type="text" 
+        id="Сведения об ответе на представление" 
+        name="Сведения об ответе на представление" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Сведения об ответе на представление')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Сведения об оплате -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Сведения об оплате" style="flex: 1;">Сведения об оплате:</label>
+    <input 
+        type="text" 
+        id="Сведения об оплате" 
+        name="Сведения об оплате" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Сведения об оплате')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Сумма оплаченных штрафов -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Сумма оплаченных штрафов" style="flex: 1;">Сумма оплаченных штрафов:</label>
+    <input 
+        type="text" 
+        id="Сумма оплаченных штрафов" 
+        name="Сумма оплаченных штрафов" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Сумма оплаченных штрафов')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Сведения об обжаловании -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Сведения об обжаловании" style="flex: 1;">Сведения об обжаловании:</label>
+    <input 
+        type="text" 
+        id="Сведения об обжаловании" 
+        name="Сведения об обжаловании" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Сведения об обжаловании')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>
+
+<!-- Дата направления приставам на взыскание -->
+<div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label for="Дата направления приставам на взыскание" style="flex: 1;">Дата направления приставам на взыскание:</label>
+    <input 
+        type="text" 
+        id="Дата направления приставам на взыскание" 
+        name="Дата направления приставам на взыскание" 
+        style="flex: 3; height: 40px; font-size: 16px;" 
+    >
+    <button 
+        type="button" 
+        onclick="clearField('Дата направления приставам на взыскание')" 
+        style="margin-left: 10px; padding: 5px 10px; font-size: 16px;"
+    >
+        Х
+    </button>
+</div>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Просмотр всех дел</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .centered-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .results-section {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        .results-section th, .results-section td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .results-section th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        .hover-row:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+        h2 {
+            margin: 25px 0 15px 0;
+            color: #007bff;
+        }
+        .button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="centered-container">
+        <h1>Все дела</h1>
+        
+        <a href="{{ url_for('task_selection') }}" class="button">Назад</a>
+
+        {% for year in sorted_years %}
+            <h2>{{ year }} год</h2>
+            
+            <table class="results-section">
+                <thead>
+                    <tr>
+                        <th>№ дела</th>
+                        <th>Наименование</th>
+                        <th>Дата вступления постановления в законную силу</th>
+                        <th>Статья</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks_by_year[year] %}
+                    <tr onclick="window.location='/view_task/{{ task.id }}'" class="hover-row">
+                        <td>{{ task.fields.get('Номер дела', '—') }}</td>
+                        <td>{{ task.fields.get('Краткое наименование', '—') }}</td>
+                        <td>{{ task.fields.get('Дата вступления постановления в законную силу', '—') }}</td>
+                        <td>{{ task.article }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
+    </div>
+</body>
+</html>

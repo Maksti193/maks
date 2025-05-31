@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проверка повторности нарушения</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <div class="centered-container">
+        <h1>Проверка повторности нарушения</h1>
+        
+        <form method="POST" class="repetition-form">
+            <div class="form-group">
+                <label for="okpo">Код ОКПО:</label>
+                <input type="text" id="okpo" name="okpo" 
+                       value="{{ okpo if okpo else '' }}" required
+                       placeholder="Введите код ОКПО">
+            </div>
+            
+            <div class="form-group">
+                <label for="violation_date">Дата нарушения:</label>
+                <input type="text" id="violation_date" name="violation_date" 
+                       value="{{ violation_date if violation_date else '' }}" 
+                       data-datepicker required
+                       placeholder="Выберите дату">
+            </div>
+            
+            <button type="submit" class="button check-button">Проверить</button>
+        </form>
+        
+        {% if request.method == 'POST' %}
+            <div class="result-section">
+                <h2>Результат проверки</h2>
+                
+                <div class="alert {% if is_repeat %}alert-warning{% else %}alert-info{% endif %}">
+                    {% if is_repeat %}
+                        <strong>ч. 2 ст. 13.19 КоАП</strong> - повторное нарушение
+                    {% else %}
+                        <strong>ч. 1 ст. 13.19 КоАП</strong> - первичное нарушение
+                    {% endif %}
+                </div>
+                
+                {% if results %}
+                <div class="results-table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>№ дела</th>
+                                <th>Дата вступления в силу</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in results %}
+                            <tr>
+                                <td>{{ item.case_number }}</td>
+                                <td>{{ item.effective_date }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+        {% endif %}
+        
+        <a href="{{ url_for('home') }}" class="button back-button">На главную</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            flatpickr("#violation_date", {
+                dateFormat: "d.m.Y",
+                locale: "ru",
+                allowInput: true
+            });
+        });
+    </script>
+</body>
+</html>

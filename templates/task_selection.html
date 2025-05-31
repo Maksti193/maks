@@ -1,0 +1,45 @@
+[file name]: task_selection.html
+[file content begin]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор дел</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="centered-container">
+        <h1>Выбор дел</h1>
+        <div>
+            <p>Количество дел:</p>
+            <ul>
+                {% for user, count in tasks_stats.items() %}
+                    <li>{{ user }}: {{ count }} шт.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <p>Общая сумма назначенных штрафов: {{ tasks_stats['Общая сумма штрафов'] }} руб.</p>
+        </div>
+        <div class="buttons-grid">
+            <a href="/article_selection" class="button">Дела К</a>
+            <a href="/article_selection" class="button">Дела ТО</a>
+            <a href="/article_selection" class="button">Дела ЦБ</a>
+            <a href="/article_selection" class="button">Дела РП</a>
+            <a href="/article_selection" class="button">Дела МЭ</a>
+            <a href="/article_selection" class="button">Дела БХ</a>
+            <a href="/article_selection" class="button">Дела МРФ</a>
+            <a href="/view_all_tasks" class="button">Просмотр</a>
+            <a href="/import_from_excel" class="button">Импорт из Excel</a>
+        </div>
+        <button 
+            onclick="location.href='/logout'" 
+            class="button"
+        >
+            Сменить пользователя
+        </button>
+    </div>
+</body>
+</html>
+[file content end]
